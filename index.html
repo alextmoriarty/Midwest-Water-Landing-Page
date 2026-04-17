@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/favicon.png">
   <title>Free Water Test — Midwest Water Co. | Iowa & Illinois</title>
 
   <!-- ═══ META PIXEL — uncomment + replace YOUR_PIXEL_ID ═══
@@ -93,14 +94,12 @@
        HEADER
     ───────────────────────────── */
     .site-header {
-      background: rgba(255,255,255,0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
       padding: 14px 24px;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 20px var(--shadow-s);
     }
     .header-inner {
       max-width: var(--max-w);
@@ -117,7 +116,7 @@
       font-family: var(--font-d);
       font-size: 1.25rem;
       font-weight: 800;
-      color: var(--navy);
+      color: var(--white);
     }
     .logo-fallback span { color: var(--blue); }
     .header-phone {
@@ -149,7 +148,7 @@
       background-image: url('images/hero-bg-water.png');
       background-size: cover;
       background-position: center;
-      opacity: 0.15;
+      opacity: 0.28;
     }
     .hero-overlay {
       position: absolute; inset: 0;
@@ -365,7 +364,7 @@
     .hero-wave svg { display: block; width: 100%; }
 
     /* Spacer so overlapping form card doesn't cover content */
-    .hero-spacer { height: 72px; background: var(--light); }
+    .hero-spacer { height: 32px; background: var(--light); }
 
     /* ─────────────────────────────
        SHARED SECTION STYLES
@@ -528,13 +527,14 @@
     .step-title { font-weight: 700; color: var(--navy); margin-bottom: 8px; font-size: 0.96rem; }
     .step-desc  { font-size: 0.84rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
     .step-img {
-      width: 100%; height: 120px;
+      width: 100%; height: 200px;
       object-fit: cover;
+      object-position: center top;
       border-radius: 8px;
       box-shadow: 0 4px 14px var(--shadow-m);
     }
     .step-img-ph {
-      width: 100%; height: 120px;
+      width: 100%; height: 200px;
       background: linear-gradient(135deg, #C0DAE6, #9BBDCE);
       border-radius: 8px;
       display: flex;
@@ -818,16 +818,13 @@
       position: relative;
       overflow: hidden;
       padding: 80px 24px;
+      background: var(--navy);
     }
     .cta-bg {
       position: absolute; inset: 0;
       background-image: url('images/hero-bg-water.jpg');
       background-size: cover;
       background-position: center;
-    }
-    .cta-bg-fallback {
-      position: absolute; inset: 0;
-      background: linear-gradient(140deg, #0D2137, #163352);
     }
     .cta-overlay {
       position: absolute; inset: 0;
@@ -936,7 +933,7 @@
   <div class="urgency-bar">
     Only <strong><span class="js-slots">8</span> free water test appointments</strong>
     left in <span class="js-month">April</span> for Iowa &amp; Illinois homeowners.
-    <a href="#hero-form">Claim yours now</a>
+    <a href="#bottom-cta">Claim yours now</a>
   </div>
 
   <!-- HEADER -->
@@ -1064,8 +1061,8 @@
 
     <!-- Wave shape cutting into next section -->
     <div class="hero-wave">
-      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M0,60 L0,20 Q360,60 720,20 Q1080,-20 1440,20 L1440,60 Z" fill="#EDF5FA"/>
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;margin-bottom:-2px">
+        <path d="M0,60 L0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 Z" fill="#EDF5FA"/>
       </svg>
     </div>
   </section>
@@ -1074,7 +1071,7 @@
 
 
   <!-- ════════════ SYMPTOMS ════════════ -->
-  <section class="section section-alt" style="padding-top: 96px;">
+  <section class="section section-alt" style="padding-top: 48px;">
     <div class="container">
       <div class="eyebrow">The Hard Water Problem</div>
       <h2 class="s-title">Does Any of This Sound Like Your Home?</h2>
@@ -1411,7 +1408,6 @@
   <!-- ════════════ BOTTOM CTA ════════════ -->
   <section class="bottom-cta" id="bottom-cta">
     <div class="cta-bg"></div>
-    <div class="cta-bg-fallback"></div>
     <div class="cta-overlay"></div>
 
     <div class="cta-inner container">
@@ -1483,6 +1479,54 @@
     document.querySelectorAll('.js-slots').forEach(el => el.textContent = JS_SLOTS);
     document.querySelectorAll('.js-year').forEach(el  => el.textContent = now.getFullYear());
 
+    // ZIP VALIDATION
+    const VALID_ZIPS = new Set([
+      '52030','52037','52060','52064','52069','52070','52074','52075',
+      '52207','52216','52254','52255','52306','52309','52320','52323',
+      '52337','52358','52362','52637','52640','52646','52653','52701',
+      '52720','52721','52722','52726','52727','52728','52729','52730',
+      '52731','52732','52733','52734','52736','52737','52738','52739',
+      '52742','52745','52746','52747','52748','52749','52750','52751',
+      '52752','52753','52754','52755','52756','52757','52758','52759',
+      '52760','52761','52765','52766','52767','52768','52769','52771',
+      '52772','52773','52774','52776','52777','52778','52801','52802',
+      '52803','52804','52805','52806','52807','52808','52809',
+      '61014','61037','61071','61074','61081','61201','61204','61230',
+      '61231','61232','61233','61234','61235','61236','61237','61238',
+      '61239','61240','61241','61242','61243','61244','61250','61251',
+      '61252','61254','61256','61257','61258','61259','61260','61261',
+      '61262','61263','61264','61265','61266','61270','61272','61273',
+      '61274','61275','61276','61277','61278','61279','61281','61282',
+      '61283','61284','61285','61299','61314','61338','61344','61345',
+      '61346','61361','61376','61379','61401','61402','61410','61412',
+      '61413','61414','61417','61418','61419','61421','61423','61426',
+      '61428','61430','61434','61435','61436','61439','61442','61443',
+      '61447','61448','61449','61451','61453','61462','61465','61466',
+      '61467','61468','61469','61472','61476','61483','61485','61486',
+      '61488','61489','61490','61491'
+    ]);
+
+    function checkZip(zip, fieldEl) {
+      if (!VALID_ZIPS.has(zip)) {
+        fieldEl.style.borderColor = '#E53E3E';
+        fieldEl.style.boxShadow = '0 0 0 3px rgba(229,62,62,0.15)';
+        let msg = fieldEl.nextElementSibling;
+        if (!msg || !msg.classList.contains('zip-error')) {
+          msg = document.createElement('p');
+          msg.className = 'zip-error';
+          msg.style.cssText = 'color:#E53E3E;font-size:0.78rem;margin:-4px 0 10px;line-height:1.4';
+          msg.textContent = "We don't service that area just yet — we're sorry! We're expanding soon.";
+          fieldEl.parentNode.insertBefore(msg, fieldEl.nextSibling);
+        }
+        return false;
+      }
+      fieldEl.style.borderColor = '';
+      fieldEl.style.boxShadow = '';
+      const msg = fieldEl.nextElementSibling;
+      if (msg && msg.classList.contains('zip-error')) msg.remove();
+      return true;
+    }
+
     // UTM CAPTURE
     function getUTMs() {
       const p = new URLSearchParams(window.location.search);
@@ -1513,6 +1557,8 @@
       const phone = document.getElementById('h_phone').value.trim();
       const zip   = document.getElementById('h_zip').value.trim();
       if (!first || !email || !zip) { alert('Please fill in all fields before submitting.'); return; }
+      const hZipEl = document.getElementById('h_zip');
+      if (!checkZip(zip, hZipEl)) return;
       sendLead(
         { source:'hero_form', first_name:first, last_name:last, email, phone, zip, ...getUTMs() },
         'hero-success', ['step2']
@@ -1527,6 +1573,8 @@
       const phone = document.getElementById('b_phone').value.trim();
       const zip   = document.getElementById('b_zip').value.trim();
       if (!first || !email || !phone || !zip) { alert('Please fill in all fields before submitting.'); return; }
+      const bZipEl = document.getElementById('b_zip');
+      if (!checkZip(zip, bZipEl)) return;
       sendLead(
         { source:'bottom_form', first_name:first, last_name:last, email, phone, zip, ...getUTMs() },
         'bottom-success', ['b_first','b_last','b_email','b_phone','b_zip']
